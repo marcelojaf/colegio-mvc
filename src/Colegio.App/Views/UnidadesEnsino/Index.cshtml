@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Colegio.App.DTO.UnidadeEnsinoDTO>
+
+@{
+    ViewData["Title"] = "Lista de Unidades de Ensino";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-info" asp-action="Create"> + Nova</a>
+</p>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CEP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UF)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CEP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UF)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id"><span
+                            class="fa fa-search"></span></a>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><span
+                            class="fa fa-pencil-alt"></span></a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><span
+                            class="fa fa-trash"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

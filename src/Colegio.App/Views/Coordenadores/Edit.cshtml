@@ -1,0 +1,64 @@
+﻿@model Colegio.App.DTO.CoordenadorDTO
+
+@{
+    ViewData["Title"] = "Editar Coordenador";
+}
+
+<h2>Editar Coordenador</h2>
+
+<hr />
+
+<form asp-action="Edit">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label asp-for="Nome" class="control-label"></label>
+            <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="Sobrenome" class="control-label"></label>
+                <input asp-for="Sobrenome" class="form-control" />
+                <span asp-validation-for="Sobrenome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Senha" class="control-label">Senha (Deixe em branco para manter a senha atual)</label>
+                <input asp-for="Senha" class="form-control" type="password" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Confirmar Senha</label>
+                <input class="form-control" type="password" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+            @if (User.IsInRole("Super"))
+            {
+                <div class="form-group">
+                    <label asp-for="UnidadeEnsinoId" class="control-label"></label>
+                    <select asp-for="UnidadeEnsinoId" class="form-select"
+                        asp-items="@(new SelectList(Model.UnidadesEnsino, "Id", "Nome"))">
+                        <option selected>Selecione uma opção</option>
+                    </select>
+                    <span asp-validation-for="UnidadeEnsinoId" class="text-danger"></span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <hr />
+    <div class="form-group">
+        <input type="submit" value="Salvar" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
